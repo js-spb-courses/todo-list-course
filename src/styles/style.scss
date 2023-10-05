@@ -1,0 +1,40 @@
+$main-color: bisque;
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  margin: 0 auto;
+  width: 350px;
+}
+
+.item {
+  position: relative;
+  margin: 15px 0;
+  padding: 10px;
+  background-color: $main-color;
+
+  &__delete-button {
+    background-color: white;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: border-color 1s, background-color 1s;
+
+    &:hover {
+      border-color: red;
+      background-color: $main-color;
+    }
+
+    &--disabled {
+      opacity: 0;
+    }
+  }
+}
