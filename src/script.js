@@ -3,11 +3,11 @@ import {
   subscribeOnAdd,
   subscribeOnDelete,
   addItem,
-  deleteItem,
+  deleteItemForStore,
 } from './items.js';
 
 subscribeOnAdd(function (items) {
-  debugger;
+  console.log('add elements: ', items);
 });
 
 subscribeOnDelete(function (item) {
@@ -69,7 +69,7 @@ function createItem(event) {
       id: res.id,
     });
 
-    addItem(items.at(0));
+    addItem([items.at(0)]);
 
     htmlElements.itemList.innerHTML += htmlString;
     htmlElements.inputText.value = '';
@@ -91,7 +91,7 @@ function deleteItem(event) {
     .then(function () {
       element.remove();
 
-      deleteItem(id);
+      deleteItemForStore(id);
     })
     .catch(function () {
       alert('Сервер упал!!!');
