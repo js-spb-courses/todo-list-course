@@ -1,4 +1,20 @@
 import { storage } from './storage.js';
+import {
+  subscribeOnAdd,
+  subscribeOnDelete,
+  addItem,
+  deleteItem,
+} from './items.js';
+
+subscribeOnAdd(function (items) {
+  debugger;
+});
+
+subscribeOnDelete(function (item) {
+  debugger;
+});
+
+let items = [];
 
 const htmlElements = {
   formElement: document.querySelector('.todo-form'),
@@ -6,10 +22,9 @@ const htmlElements = {
   inputText: document.querySelector('.todo-form__input'),
 };
 
-let items = [];
-
 storage.getAll().then((res) => {
   items = res;
+  addItem(items);
   renderAllTask();
 });
 
@@ -54,6 +69,8 @@ function createItem(event) {
       id: res.id,
     });
 
+    addItem(items.at(0));
+
     htmlElements.itemList.innerHTML += htmlString;
     htmlElements.inputText.value = '';
   });
@@ -73,6 +90,8 @@ function deleteItem(event) {
     .delete(id)
     .then(function () {
       element.remove();
+
+      deleteItem(id);
     })
     .catch(function () {
       alert('Сервер упал!!!');

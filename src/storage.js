@@ -1,25 +1,8 @@
-interface Task {
-  id: string;
-  text: string;
-}
-
-interface Storage {
-  itemsKey: string;
-  idKey: string;
-  api: string;
-  add: (a: number, b: number) => number;
-  getAll: () => Promise<Task[]>;
-}
-
-export const storage: Storage = {
+export const storage = {
   itemsKey: 'todo-items',
   idKey: 'todo-id',
   api: 'http://localhost:3000/items',
-  add: function (a: number, b: number): number {
-    return a + b;
-  },
-
-  getAll: function (): Promise<Task[]> {
+  getAll: function () {
     return fetch(this.api, { method: 'GET' }).then((res) => {
       return res.json();
     });
